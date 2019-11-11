@@ -80,4 +80,12 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader2DTestVS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="shader2DTestPS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+  </ItemGroup>
 </Project>
