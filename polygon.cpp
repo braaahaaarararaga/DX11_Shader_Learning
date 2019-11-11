@@ -1,4 +1,4 @@
-
+ï»¿
 #include "main.h"
 #include "renderer.h"
 #include "shader.h"
@@ -29,19 +29,19 @@ void CPolygon::Init()
 */
 
 	vertex[0].Position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	//vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[0].Diffuse = XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f);
 	//vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
-	vertex[1].Position = XMFLOAT3(100.0f, 0.0f, 0.0f);
-	//vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[1].Position = XMFLOAT3(800.0f, 0.0f, 0.0f);
+	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f);
 	//vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 	//
-	vertex[2].Position = XMFLOAT3(0.0f, 200.0f, 0.0f);
-	//vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[2].Position = XMFLOAT3(0.0f, 600.0f, 0.0f);
+	vertex[2].Diffuse = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
 	//vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
 	//
-	vertex[3].Position = XMFLOAT3(100.0f, 200.0f, 0.0f);
-	//vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	vertex[3].Position = XMFLOAT3(800.0f, 600.0f, 0.0f);
+	vertex[3].Diffuse = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
 	//vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
 
@@ -61,7 +61,7 @@ void CPolygon::Init()
 
 
 	m_Shader = new CShader();
-	m_Shader->Init( "shader2DTestVS.cso", "shader2DTestPS.cso" );
+	m_Shader->Init( "x64/Debug/shader2DTestVS.cso", "x64/Debug/shader2DTestPS.cso" );
 }
 
 
@@ -85,7 +85,7 @@ void CPolygon::Update()
 void CPolygon::Draw()
 {
 
-	// ’¸“_ƒoƒbƒtƒ@Ý’è
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
 	UINT stride = sizeof( VERTEX_3D );
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
@@ -101,10 +101,10 @@ void CPolygon::Draw()
 	m_Shader->Set();
 
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP );
 
-	// ƒ|ƒŠƒSƒ“•`‰æ
+	// ãƒãƒªã‚´ãƒ³æç”»
 	CRenderer::GetDeviceContext()->Draw( 4, 0 );
 
 }

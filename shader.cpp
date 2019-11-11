@@ -1,4 +1,4 @@
-
+ï»¿
 #include "main.h"
 #include "renderer.h"
 #include "shader.h"
@@ -11,7 +11,7 @@
 void CShader::Init( const char* VertexShader, const char* PixelShader )
 {
 
-	// ’¸“_ƒVƒF[ƒ_¶¬
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ç”Ÿæˆ
 	{
 		FILE* file;
 		long int fsize;
@@ -25,11 +25,13 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 		CRenderer::GetDevice()->CreateVertexShader(buffer, fsize, NULL, &m_VertexShader);
 
 
-		// “ü—ÍƒŒƒCƒAƒEƒg¶¬
+		// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”Ÿæˆ
+		// æ™®é€šã®å…¥åŠ›ç”Ÿæˆä»¥å¤–ã‚‚ã€ ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ ã¨ã„ã†DX11ã®æ–°ã—ã„æ–¹æ³•ã‚‚ã‚ã‚‹ã€è‡ªå‹•çš„ã«ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‹ã‚‰layoutã‚’å–ã£ã¦ãã‚‹
 		{
 			D3D11_INPUT_ELEMENT_DESC layout[] =
 			{
 				{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "DIFFUSE", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
 			};
 			UINT numElements = ARRAYSIZE(layout);
 
@@ -45,7 +47,7 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 
 
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_¶¬
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ç”Ÿæˆ
 	{
 		FILE* file;
 		long int fsize;
@@ -63,7 +65,7 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 
 
 
-	// ’è”ƒoƒbƒtƒ@¶¬
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
 	{
 		D3D11_BUFFER_DESC hBufferDesc;
 		hBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -95,20 +97,20 @@ void CShader::Uninit()
 void CShader::Set()
 {
 
-	// ƒVƒF[ƒ_Ý’è
+	// ã‚·ã‚§ãƒ¼ãƒ€è¨­å®š
 	CRenderer::GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
 	CRenderer::GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
 
 
-	// “ü—ÍƒŒƒCƒAƒEƒgÝ’è
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	CRenderer::GetDeviceContext()->IASetInputLayout(m_VertexLayout);
 
 
-	// ’è”ƒoƒbƒtƒ@XV
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡æ›´æ–°
 	CRenderer::GetDeviceContext()->UpdateSubresource(m_ConstantBuffer, 0, NULL, &m_Constant, 0, 0);
 
 
-	// ’è”ƒoƒbƒtƒ@Ý’è
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡è¨­å®š
 	CRenderer::GetDeviceContext()->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
 
 	CRenderer::GetDeviceContext()->PSSetConstantBuffers(0, 1, &m_ConstantBuffer);

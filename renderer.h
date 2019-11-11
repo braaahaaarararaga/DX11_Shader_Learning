@@ -8,6 +8,7 @@
 struct VERTEX_3D
 {
     XMFLOAT3 Position;
+	XMFLOAT4 Diffuse;
 };
 
 

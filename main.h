@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -14,8 +14,8 @@ using namespace DirectX;
 #pragma comment (lib, "xaudio2.lib")
 
 
-#define SCREEN_WIDTH	(960)			// ƒEƒCƒ“ƒhƒE‚Ì•
-#define SCREEN_HEIGHT	(540)			// ƒEƒCƒ“ƒhƒE‚Ì‚‚³
+#define SCREEN_WIDTH	(960)			// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®å¹…
+#define SCREEN_HEIGHT	(540)			// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
 
 
 HWND GetWindow();
