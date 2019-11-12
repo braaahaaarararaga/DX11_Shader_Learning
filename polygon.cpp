@@ -30,19 +30,19 @@ void CPolygon::Init()
 
 	vertex[0].Position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f);
-	//vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
+	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
 	vertex[1].Position = XMFLOAT3(800.0f, 0.0f, 0.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f);
-	//vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
-	//
+	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
+	
 	vertex[2].Position = XMFLOAT3(0.0f, 600.0f, 0.0f);
 	vertex[2].Diffuse = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
-	//vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
-	//
+	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
+	
 	vertex[3].Position = XMFLOAT3(800.0f, 600.0f, 0.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-	//vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
+	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
 
 
 
@@ -59,6 +59,8 @@ void CPolygon::Init()
 
 	CRenderer::GetDevice()->CreateBuffer( &bd, &sd, &m_VertexBuffer );
 
+	m_Texture = new CTexture();
+	m_Texture->Load("data/TEXTURE/cocoon.tga");
 
 	m_Shader = new CShader();
 	m_Shader->Init( "x64/Debug/shader2DTestVS.cso", "x64/Debug/shader2DTestPS.cso" );
@@ -72,6 +74,8 @@ void CPolygon::Uninit()
 
 	m_VertexBuffer->Release();
 
+	m_Texture->Unload();
+	delete m_Texture;
 }
 
 
@@ -89,7 +93,7 @@ void CPolygon::Draw()
 	UINT stride = sizeof( VERTEX_3D );
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers( 0, 1, &m_VertexBuffer, &stride, &offset );
-
+	CRenderer::SetTexture(m_Texture);
 
 	XMFLOAT4X4 identity;
 	DirectX::XMStoreFloat4x4(&identity, XMMatrixIdentity());
