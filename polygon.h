@@ -11,7 +11,7 @@ private:
 	ID3D11Buffer*	m_VertexBuffer = NULL;
 	CShader*		m_Shader;
 
-	CTexture*		m_Texture;
+	CTexture*		m_Texture[2];
 
 public:
 	void Init();

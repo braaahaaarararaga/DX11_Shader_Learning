@@ -111,6 +111,7 @@ public:
 	static void SetVertexBuffers( ID3D11Buffer* VertexBuffer );
 	static void SetIndexBuffer( ID3D11Buffer* IndexBuffer );
 	static void SetTexture( CTexture* Texture );
+	static void SetTexture( CTexture* Texture, CTexture* SecTexture );
 	static void DrawIndexed( unsigned int IndexCount, unsigned int StartIndexLocation, int BaseVertexLocation );
 
 	static ID3D11Device* GetDevice( void ){ return m_D3DDevice; }
