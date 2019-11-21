@@ -6,6 +6,10 @@
 #include "game_object.h"
 
 #include "polygon.h"
+#include "Field.h"
+#include "Camera.h"
+#include <vector>
+#include <typeinfo>
 
 class CScene
 {
@@ -19,7 +23,9 @@ public:
 
 	virtual void Init()
 	{
+		AddGameObject<Field>();
 		AddGameObject<CPolygon>();
+		AddGameObject<Camera>();
 	}
 
 	virtual void Uninit()
@@ -58,6 +64,18 @@ public:
 		return gameObject;
 	}
 
-
+	template <typename T>
+	std::vector<T*> GetGameObjects()
+	{
+		std::vector<T*> objects;
+		for (CGameObject* object : m_GameObject)
+		{
+			if (typeid(*object) == typeid(T))
+			{
+				objects.push_back((T*)object);
+			}
+		}
+		return objects;
+	}
 
 };
