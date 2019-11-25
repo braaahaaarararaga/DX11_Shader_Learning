@@ -31,6 +31,7 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 			D3D11_INPUT_ELEMENT_DESC layout[] =
 			{
 				{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
 				{ "DIFFUSE", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
 				{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
 			};
@@ -78,6 +79,19 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 		hBufferDesc.ByteWidth = sizeof(CONSTANT);
 		CRenderer::GetDevice()->CreateBuffer(&hBufferDesc, NULL, &m_ConstantBuffer);
 	}
+
+	{
+		D3D11_BUFFER_DESC hBufferDesc;
+		hBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+		hBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		hBufferDesc.CPUAccessFlags = 0;
+		hBufferDesc.MiscFlags = 0;
+		hBufferDesc.StructureByteStride = sizeof(float);
+
+		hBufferDesc.ByteWidth = sizeof(LIGHT);
+		CRenderer::GetDevice()->CreateBuffer(&hBufferDesc, NULL, &m_LightBuffer);
+		m_Light.Direction = XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
+	}
 }
 
 
@@ -86,6 +100,7 @@ void CShader::Init( const char* VertexShader, const char* PixelShader )
 void CShader::Uninit()
 {
 	if (m_ConstantBuffer)	m_ConstantBuffer->Release();
+	if (m_LightBuffer)		m_LightBuffer->Release();
 
 	if (m_VertexLayout)		m_VertexLayout->Release();
 	if (m_VertexShader)		m_VertexShader->Release();
@@ -109,10 +124,12 @@ void CShader::Set()
 
 	// 定数バッファ更新
 	CRenderer::GetDeviceContext()->UpdateSubresource(m_ConstantBuffer, 0, NULL, &m_Constant, 0, 0);
+	CRenderer::GetDeviceContext()->UpdateSubresource(m_LightBuffer, 0, NULL, &m_Light, 0, 0);
 
 
 	// 定数バッファ設定
 	CRenderer::GetDeviceContext()->VSSetConstantBuffers(0, 1, &m_ConstantBuffer);
+	CRenderer::GetDeviceContext()->VSSetConstantBuffers(1, 1, &m_LightBuffer);
 
 	CRenderer::GetDeviceContext()->PSSetConstantBuffers(0, 1, &m_ConstantBuffer);
 }

@@ -8,6 +8,7 @@ struct CONSTANT
 	XMFLOAT4X4 ProjectionMatrix;
 };
 
+
 class CShader
 {
 private:
@@ -16,7 +17,9 @@ private:
 	ID3D11InputLayout*      m_VertexLayout;
 
 	ID3D11Buffer*			m_ConstantBuffer;
+	ID3D11Buffer*			m_LightBuffer;
 	CONSTANT				m_Constant;
+	LIGHT					m_Light;
 
 public:
 	void Init( const char* VertexShader, const char* PixelShader );
