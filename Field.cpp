@@ -99,6 +99,8 @@ void Field::Draw()
 	XMStoreFloat4x4(&matrix, camera->GetViewMatrix());
 	m_Shader->SetViewMatrix(&matrix);
 	m_Shader->SetProjectionMatrix(&projection);
+	XMFLOAT3 camPos = camera->GetPosition();
+	m_Shader->SetCameraPosition(camPos);
 
 	m_Shader->Set();
 

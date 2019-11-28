@@ -6,6 +6,7 @@ struct CONSTANT
 	XMFLOAT4X4 WorldMatrix;
 	XMFLOAT4X4 ViewMatrix;
 	XMFLOAT4X4 ProjectionMatrix;
+	XMFLOAT4   CameraPosition;
 };
 
 
@@ -29,6 +30,15 @@ public:
 	void SetProjectionMatrix(XMFLOAT4X4* ProjectionMatrix) { m_Constant.ProjectionMatrix = Transpose( ProjectionMatrix ); }
 	void SetViewMatrix(XMFLOAT4X4* ViewMatrix) { m_Constant.ViewMatrix = Transpose(ViewMatrix); }
 	void SetWorldMatrix(XMFLOAT4X4* WorldMatrix) { m_Constant.WorldMatrix = Transpose(WorldMatrix); }
+	void SetCameraPosition(XMFLOAT3& cameraPosition)
+	{
+		XMFLOAT4 camPos;
+		camPos.x = cameraPosition.x;
+		camPos.y = cameraPosition.y;
+		camPos.z = cameraPosition.z;
+		camPos.w = 0.0f;
+		m_Constant.CameraPosition = camPos; 
+	}
 
 	XMFLOAT4X4 Transpose(XMFLOAT4X4* Matrix)
 	{

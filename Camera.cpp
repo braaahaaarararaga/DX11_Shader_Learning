@@ -1,6 +1,6 @@
 
 #include "Camera.h"
-
+#include "input.h"
 
 
 
@@ -64,7 +64,48 @@ void Camera::Update()
 
 bool Camera::CheckInput()
 {
-	return false;
+	bool viewChanged = false;
+	int input;
+	viewChanged |= input = CInput::GetKeyPress(VK_NUMPAD8) - CInput::GetKeyPress(VK_NUMPAD2);
+	if (input)
+	{
+		viewChanged = true;
+		m_Rotation.x += input * 0.03f;
+	}
+
+	viewChanged |= input = CInput::GetKeyPress(VK_NUMPAD6) - CInput::GetKeyPress(VK_NUMPAD4);
+	if (input)
+	{
+		m_Rotation.y += input * 0.03f;
+	}
+
+	viewChanged |= input = CInput::GetKeyPress(VK_UP) - CInput::GetKeyPress(VK_DOWN);
+	if (input)
+	{
+		XMFLOAT4X4 mat;
+		XMStoreFloat4x4(&mat, m_InvViewMatrix);
+		m_Position.x += mat._31 * input * 0.1f;
+		m_Position.y += mat._32 * input * 0.1f;
+		m_Position.z += mat._33 * input * 0.1f;
+
+	}
+
+	viewChanged |= input = CInput::GetKeyPress(VK_RIGHT) - CInput::GetKeyPress(VK_LEFT);
+	if (input)
+	{
+		XMFLOAT4X4 mat;
+		XMStoreFloat4x4(&mat, m_InvViewMatrix);
+		m_Position.x += mat._11 * input * 0.1f;
+		m_Position.y += mat._12 * input * 0.1f;
+		m_Position.z += mat._13 * input * 0.1f;
+	}
+
+	viewChanged |= input = CInput::GetKeyPress(VK_NUMPAD7) - CInput::GetKeyPress(VK_NUMPAD9);
+	if (input)
+	{
+		m_Position.y += input * 0.13;
+	}
+	return viewChanged;
 }
 
 XMMATRIX & Camera::GetViewMatrix()
