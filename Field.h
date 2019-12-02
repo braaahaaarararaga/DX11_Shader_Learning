@@ -17,6 +17,8 @@ private:
 
 	CTexture*		m_Texture[2];
 
+	XMFLOAT3 m_Rotation;
+
 public:
 	Field();
 	~Field();

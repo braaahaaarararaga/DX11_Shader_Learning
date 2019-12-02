@@ -1,9 +1,11 @@
 #include "Field.h"
 #include "scene.h"
-
+#include "input.h"
 
 
 Field::Field()
+	:
+	m_Rotation(0.0f, 0.0f, 0.0f)
 {
 }
 
@@ -74,6 +76,16 @@ void Field::Uninit()
 
 void Field::Update()
 {
+	int input = CInput::GetKeyPress('J') - CInput::GetKeyPress('L');
+	if (input)
+	{
+		m_Rotation.z += input * 0.1f;
+	}
+	input = CInput::GetKeyPress('I') - CInput::GetKeyPress('K');
+	if (input)
+	{
+		m_Rotation.x += input * 0.1f;
+	}
 }
 
 void Field::Draw()
@@ -87,7 +99,7 @@ void Field::Draw()
 
 	XMMATRIX world;
 	world = XMMatrixScaling(1.0f, 1.0f, 1.0f);
-	world *= XMMatrixRotationRollPitchYaw(0.0f, 0.0f, 0.0f);
+	world *= XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
 	world *= XMMatrixTranslation(0.0f, -5.0f, 0.0f);
 
 	XMFLOAT4X4 projection;
