@@ -13,6 +13,17 @@ struct VERTEX_3D
 	XMFLOAT2 TexCoord;
 };
 
+// í∏ì_ç\ë¢ëÃ
+struct VERTEX_3D_NORMAL
+{
+    XMFLOAT3 Position;
+	XMFLOAT3 Normal;
+	XMFLOAT3 Binormal;
+	XMFLOAT3 Tangent;
+	XMFLOAT4 Diffuse;
+	XMFLOAT2 TexCoord;
+};
+
 
 
 

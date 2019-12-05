@@ -134,6 +134,7 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="ShaderNormal.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="polygon.cpp" />
   </ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="renderer.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="ShaderNormal.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="polygon.h" />
   </ItemGroup>
@@ -174,6 +176,8 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="shader3DNarmalMappingPS.hlsl" />
+    <FxCompile Include="shader3DNormalMappingVS.hlsl" />
     <FxCompile Include="shader3DTestVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

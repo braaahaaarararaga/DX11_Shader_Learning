@@ -53,6 +53,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderNormal.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -84,6 +87,7 @@
     </ClInclude>
     <ClInclude Include="Field.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ShaderNormal.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -99,6 +103,12 @@
       <Filter>ソース ファイル\shader</Filter>
     </FxCompile>
     <FxCompile Include="Shader3DTextPS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="shader3DNormalMappingVS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="shader3DNarmalMappingPS.hlsl">
       <Filter>ソース ファイル\shader</Filter>
     </FxCompile>
   </ItemGroup>
