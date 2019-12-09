@@ -19,8 +19,10 @@ cbuffer ConstantBuffer : register(b0)
 }
 
 void main(
-	in float4 inPosition : POSITION0, in float4 inNormal : NORMAL, in float4 inDiffuse : DIFFUSE, in float2 inTexcoord : TEXCOORD,
-	out float4 outPosition : SV_POSITION, out float4 outWorld : POSITIONT1, out float4 outNormal : NORMAL0, out float4 outDiffuse : DIFFUSE, out float2 outTexcoord : TEXCOORD
+	in float4 inPosition : POSITION0, in float4 inNormal : NORMAL, in float4 inBinormal: BINORMAL0, in float4 inTangent : TANGENT0,
+        in float4 inDiffuse : DIFFUSE, in float2 inTexcoord : TEXCOORD,
+	out float4 outPosition : SV_POSITION, out float4 outWorld : POSITIONT1, out float4 outNormal : NORMAL0, out float4 outBinormal : BINORMAL0,
+        out float4 outTangent : TANGENT0,  out float4 outDiffuse : DIFFUSE, out float2 outTexcoord : TEXCOORD
 )
 {
     matrix wvp;
@@ -48,6 +50,8 @@ void main(
     outWorld = worldPosition;
     inNormal.w = 0;
     outNormal = worldNormal;
-    outDiffuse = inDiffuse; // * light;
+    outTangent = inTangent;
+    outBinormal = inBinormal;
+    outDiffuse = inDiffuse;
     outTexcoord = inTexcoord;
 }

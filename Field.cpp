@@ -60,13 +60,11 @@ void Field::Init()
 
 	CRenderer::GetDevice()->CreateBuffer(&bd, &sd, &m_VertexBuffer);
 
-	m_Texture[0] = new CTexture();
-	m_Texture[0]->Load("data/TEXTURE/Rock_Normal.tga");
-	m_Texture[1] = new CTexture();
-	m_Texture[1]->Load("data/TEXTURE/cocoon.tga");
+	m_Texture = new CTexture();
+	m_Texture->Load("data/TEXTURE/Rock_Normal.tga");
 
-	m_Shader = new CShader();
-	m_Shader->Init("x64/Debug/shader3DTestVS.cso", "x64/Debug/Shader3DTextPS.cso");
+	m_Shader = new ShaderNormal();
+	m_Shader->Init("x64/Debug/shader3DNormalMappingVS.cso", "x64/Debug/shader3DNarmalMappingPS.cso");
 }
 
 void Field::Uninit()
@@ -76,10 +74,8 @@ void Field::Uninit()
 
 	m_VertexBuffer->Release();
 
-	m_Texture[0]->Unload();
-	m_Texture[1]->Unload();
-	delete m_Texture[0];
-	delete m_Texture[1];
+	m_Texture->Unload();
+	delete m_Texture;
 }
 
 void Field::Update()
@@ -94,6 +90,16 @@ void Field::Update()
 	{
 		m_Rotation.x += input * 0.1f;
 	}
+	input = CInput::GetKeyPress('A') - CInput::GetKeyPress('D');
+	if (input)
+	{
+		m_Position.x += input * 0.1f;
+	}
+	input = CInput::GetKeyPress('W') - CInput::GetKeyPress('S');
+	if (input)
+	{
+		m_Position.y += input * 0.1f;
+	}
 }
 
 void Field::Draw()
@@ -103,12 +109,12 @@ void Field::Draw()
 	UINT stride = sizeof(VERTEX_3D_NORMAL);
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
-	CRenderer::SetTexture(m_Texture[0], m_Texture[1]);
+	CRenderer::SetTexture(m_Texture);
 
 	XMMATRIX world;
 	world = XMMatrixScaling(1.0f, 1.0f, 1.0f);
 	world *= XMMatrixRotationRollPitchYaw(m_Rotation.x, m_Rotation.y, m_Rotation.z);
-	world *= XMMatrixTranslation(0.0f, -5.0f, 0.0f);
+	world *= XMMatrixTranslation(m_Position.x, m_Position.y, m_Position.z);
 
 	XMFLOAT4X4 projection;
 	XMFLOAT4X4 matrix;

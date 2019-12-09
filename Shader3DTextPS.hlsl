@@ -10,13 +10,13 @@ cbuffer LightBuffer : register(b1)
 
 }
 
-Texture2D g_Texture[2] : register(t0);
+Texture2D g_Texture : register(t0);
 SamplerState g_SamplerState : register(s0);
 
 void main(in float4 inPosition : SV_POSITION, in float4 inWorld : POSITION1, in float4 inNormal : NORMAL0, in float4 inDiffuse : DIFFUSE, in float2 inTexCoord : TEXCOORD,
 	out float4 outDiffuse : SV_Target)
 {
-    outDiffuse = g_Texture[0].Sample(g_SamplerState, inTexCoord);
+    outDiffuse = g_Texture.Sample(g_SamplerState, inTexCoord);
     //outDiffuse *= g_Texture[1].Sample(g_SamplerState, inTexCoord);
     outDiffuse *= inDiffuse;
     //outDiffuse += inSpecular;

@@ -54,7 +54,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ShaderNormal.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +87,9 @@
     </ClInclude>
     <ClInclude Include="Field.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="ShaderNormal.h" />
+    <ClInclude Include="ShaderNormal.h">
+      <Filter>ソース ファイル\shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

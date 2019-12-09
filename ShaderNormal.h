@@ -3,11 +3,15 @@
 #include "renderer.h"
 
 
-struct CONSTANT
+struct CONSTANT_NORMAL
 {
 	XMFLOAT4X4 WorldMatrix;
 	XMFLOAT4X4 ViewMatrix;
 	XMFLOAT4X4 ProjectionMatrix;
+};
+
+struct CONSTANT_COMMON
+{
 	XMFLOAT4   CameraPosition;
 };
 
@@ -19,8 +23,10 @@ private:
 	ID3D11InputLayout*      m_VertexLayout;
 
 	ID3D11Buffer*			m_ConstantBuffer;
+	ID3D11Buffer*			m_CommonBuffer;
 	ID3D11Buffer*			m_LightBuffer;
-	CONSTANT				m_Constant;
+	CONSTANT_NORMAL			m_Constant;
+	CONSTANT_COMMON			m_Constant_common;
 	LIGHT					m_Light;
 
 public:
@@ -38,7 +44,7 @@ public:
 		camPos.y = cameraPosition.y;
 		camPos.z = cameraPosition.z;
 		camPos.w = 0.0f;
-		m_Constant.CameraPosition = camPos;
+		m_Constant_common.CameraPosition = camPos;
 	}
 
 	XMFLOAT4X4 Transpose(XMFLOAT4X4* Matrix)
