@@ -83,12 +83,12 @@ void Field::Update()
 	int input = CInput::GetKeyPress('J') - CInput::GetKeyPress('L');
 	if (input)
 	{
-		m_Rotation.z += input * 0.1f;
+		m_Rotation.z += input * 0.01f;
 	}
 	input = CInput::GetKeyPress('I') - CInput::GetKeyPress('K');
 	if (input)
 	{
-		m_Rotation.x += input * 0.1f;
+		m_Rotation.x += input * 0.01f;
 	}
 	input = CInput::GetKeyPress('A') - CInput::GetKeyPress('D');
 	if (input)

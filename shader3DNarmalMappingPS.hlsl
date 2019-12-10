@@ -42,7 +42,7 @@ void main(
     eyev = normalize(eyev);
     float specular = -dot(eyev, refv);
     specular = saturate(specular);
-    specular = pow(specular, 10);
+    specular = pow(specular, 128);
     outDiffuse += specular;
     
     float light = -dot(normal, Light.Direction.xyz);
