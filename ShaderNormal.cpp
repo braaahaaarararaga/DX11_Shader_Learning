@@ -96,7 +96,7 @@ void ShaderNormal::Init(const char* VertexShader, const char* PixelShader)
 
 		hBufferDesc.ByteWidth = sizeof(LIGHT);
 		CRenderer::GetDevice()->CreateBuffer(&hBufferDesc, NULL, &m_LightBuffer);
-		m_Light.Direction = XMFLOAT4(0.0f, -1.0f, 0.0f, 0.0f);
+		m_Light.Direction = XMFLOAT4(1.0f, 1.0f, 0.0f, 0.0f);
 	}
 }
 

@@ -1,6 +1,6 @@
 struct LIGHT
 {
-    float4 Direction;
+    float4 Position;
     float4 Diffuse;
     float4 Ambient;
 };
@@ -36,7 +36,9 @@ void main(
     normal = normalize(mul(normalMap, tbn));
     //outDiffuse *= g_Texture[1].Sample(g_SamplerState, inTexCoord);
     outDiffuse = inDiffuse *0.3;
-    float3 refv = reflect(Light.Direction.xyz, normal); // ”½ŽË‚ðŒvŽZ‚·‚é
+    float3 direction = normalize(Light.Position - inWorld);
+    //direction = float3(0.0, -1.0, 0.0);
+    float3 refv = reflect(direction, normal); // ”½ŽË‚ðŒvŽZ‚·‚é
     refv = normalize(refv);
     float3 eyev = inWorld - cameraPosition;
     eyev = normalize(eyev);
@@ -45,7 +47,7 @@ void main(
     specular = pow(specular, 128);
     outDiffuse += specular;
     
-    float light = -dot(normal, Light.Direction.xyz);
+    float light = -dot(normal, direction);
     light = saturate(light);
     outDiffuse *= light;
     outDiffuse.a = 1.0;
